@@ -169,6 +169,7 @@ class MLPPolicy(nn.Module, metaclass=abc.ABCMeta):
         actions_distribution = self.forward(observations)
         # Annotates log_probs is a torch.Tensor
         log_probs: torch.Tensor = actions_distribution.log_prob(actions)
+        # see => https://pytorch.org/docs/stable/distributions.html for use of log_prob
         if not self.discrete:  # Continuous
             log_probs = log_probs.sum(1)
         assert log_probs.size() == advantages.size()
