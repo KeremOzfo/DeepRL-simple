@@ -66,7 +66,7 @@ def build_mlp(
     layers.append(output_activation)
     return nn.Sequential(*layers)
 
-class MLPPolicy(nn.Module, metaclass=abc.ABCMeta):
+class Agent(nn.Module, metaclass=abc.ABCMeta):
 
     def __init__(self,
                  ac_dim,
