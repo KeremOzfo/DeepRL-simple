@@ -227,7 +227,7 @@ class Agent(nn.Module, metaclass=abc.ABCMeta):
     def forward(self, observation: torch.FloatTensor) -> distributions.Distribution: # The function return Distribution object
 
         if self.discrete:
-            return distributions.Categorical(logits=self.logits_na(observation)) # Action probabilities based on logit values
+            return distributions.Categorical(logits=self.logits_na(observation)) # Categorical distribution based on logit values
             # https://pytorch.org/docs/stable/distributions.html
             # Creates a categorical distribution parameterized by either probs or logits
         else:
