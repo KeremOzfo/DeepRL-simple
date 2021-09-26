@@ -9,6 +9,8 @@ from gym import wrappers
 import numpy as np
 import torch
 from utils import *
+from model import MLPPolicy as PGAgent
+from parameters import arg_parse
 
 # how many rollouts to save as videos to tensorboard
 MAX_NVIDEO = 2
@@ -80,7 +82,6 @@ class RL_Trainer(object):
             self.fps = self.env.env.metadata['video.frames_per_second']
         else:
             self.fps = 10
-
 
         #########################################################
         ##################### AGENT #############################
@@ -303,3 +304,10 @@ class PG_Trainer(object):
             collect_policy = self.rl_trainer.agent.actor,
             eval_policy = self.rl_trainer.agent.actor,
             )
+
+
+
+if __name__ == "__main__":
+    params = arg_parse()
+    trainer = PG_Trainer(params)
+    trainer.run_training_loop()
