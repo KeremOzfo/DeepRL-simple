@@ -166,9 +166,9 @@ class Agent(nn.Module, metaclass=abc.ABCMeta):
         # is the expectation over collected trajectories of:
         # sum_{t=0}^{T-1} [grad [log pi(a_t|s_t) * (Q_t - b_t)]]
 
-        actions_distribution = self.forward(observations)
+        actions_distribution = self.forward(observations) # Here forward returns distribution objects for the given observations using output of the MLP model.
         # Annotates log_probs is a torch.Tensor
-        log_probs: torch.Tensor = actions_distribution.log_prob(actions)
+        log_probs: torch.Tensor = actions_distribution.log_prob(actions) # Here we have the log probabilities
         # see => https://pytorch.org/docs/stable/distributions.html for use of log_prob
         if not self.discrete:  # Continuous
             log_probs = log_probs.sum(1)
