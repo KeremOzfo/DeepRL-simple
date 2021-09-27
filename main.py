@@ -285,10 +285,11 @@ class PG_Trainer(object):
         }
 
         agent_params = {**computation_graph_args, **estimate_advantage_args, **train_args}
-
+        ##################################################################################
+        ##################################################################################
         self.params = params
-        self.params['agent_class'] = PGAgent
-        self.params['agent_params'] = agent_params
+        self.params['agent_class'] = PGAgent # pass agent class as a part of parameter
+        self.params['agent_params'] = agent_params # pass agent parameters
         self.params['batch_size_initial'] = self.params['batch_size']
 
         ################
@@ -309,5 +310,6 @@ class PG_Trainer(object):
 
 if __name__ == "__main__":
     params = arg_parse()
+    ################# Initialize the trainer where the agent class is initialized and used ###################
     trainer = PG_Trainer(params)
     trainer.run_training_loop()
