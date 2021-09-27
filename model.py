@@ -161,6 +161,7 @@ class Model(nn.Module, metaclass=abc.ABCMeta):
         observations = ptu.from_numpy(observations)
         actions = ptu.from_numpy(actions)
         advantages = ptu.from_numpy(advantages)
+        actions = actions.squeeze()
 
         ################ We want to MAXIMIZE ######################
         # is the expectation over collected trajectories of:
@@ -172,7 +173,6 @@ class Model(nn.Module, metaclass=abc.ABCMeta):
         # see => https://pytorch.org/docs/stable/distributions.html for use of log_prob
         if not self.discrete:  # Continuous
             log_probs = log_probs.sum(1)
-        print(log_probs.size(),advantages.size())
         assert log_probs.size() == advantages.size()
         loss = -(log_probs * advantages).sum()
 

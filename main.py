@@ -5,9 +5,6 @@ import sys
 import time
 
 import gym
-from gym import wrappers
-import numpy as np
-import torch
 from utils import *
 from agent import PGAgent
 from parameters import arg_parse
@@ -47,6 +44,7 @@ class RL_Trainer(object):
 
         # Make the gym environment
         self.env = gym.make(self.params['env_name'])# choose the environment
+        self.env.reset()
         self.env.seed(seed)
 
         # import plotting (locally if 'obstacles' env)
@@ -61,6 +59,7 @@ class RL_Trainer(object):
 
         # Is this env continuous, or self.discrete?
         discrete = isinstance(self.env.action_space, gym.spaces.Discrete)
+        print('env is ',self.env.action_space)
         # Are the observations images?
         img = len(self.env.observation_space.shape) > 2
 
@@ -110,6 +109,7 @@ class RL_Trainer(object):
 
         for itr in range(n_iter):
             print("\n\n********** Iteration %i ************"%itr)
+            self.env.render()
 
             # decide if videos should be rendered/logged at this iteration
             if itr % self.params['video_log_freq'] == 0 and self.params['video_log_freq'] != -1:
