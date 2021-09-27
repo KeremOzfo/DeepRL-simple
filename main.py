@@ -131,7 +131,7 @@ class RL_Trainer(object):
             ############### Collect trajectories (data )  for training ######################################
             training_returns = self.collect_training_trajectories(itr,
                                 initial_expertdata, collect_policy,
-                                self.params['batch_size'])
+                                self.params['batch_size']) # This function calls the sample_trajectories() from the utils.py wich return paths.
             paths, envsteps_this_batch, train_video_paths = training_returns
             #################################################################################################
             self.total_envsteps += envsteps_this_batch
