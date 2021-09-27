@@ -4,7 +4,7 @@ import time
 def arg_parse():
 
     parser = argparse.ArgumentParser()
-    parser.add_argument('--env_name', type=str,default='CartPole-v1')
+    parser.add_argument('--env_name', type=str,default='MountainCar-v0')
     parser.add_argument('--exp_name', type=str, default='todo')
     parser.add_argument('--n_iter', '-n', type=int, default=200)
 
