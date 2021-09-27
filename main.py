@@ -9,7 +9,7 @@ from gym import wrappers
 import numpy as np
 import torch
 from utils import *
-from model import Agent as PGAgent
+from agent import PGAgent
 from parameters import arg_parse
 
 # how many rollouts to save as videos to tensorboard
