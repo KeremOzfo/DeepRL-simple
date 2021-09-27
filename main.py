@@ -83,13 +83,14 @@ class RL_Trainer(object):
         else:
             self.fps = 10
 
-        #########################################################
-        ##################### AGENT #############################
-        #########################################################
+        #############################################################################
+        ##################### AGENT object created here #############################
+        #############################################################################
 
         agent_class = self.params['agent_class']
         self.agent = agent_class(self.env, self.params['agent_params'])
-
+        
+        ##############################################################################
     def run_training_loop(self, n_iter, collect_policy, eval_policy,
                           initial_expertdata=None, relabel_with_expert=False,
                           start_relabel_with_expert=1, expert_policy=None):
