@@ -82,8 +82,7 @@ def mean_squared_error(a, b):
     return np.mean((a - b) ** 2)
 
 
-############################################
-############################################
+########################## Sample trajectory using the given policy ###############################################
 
 def sample_trajectory(env, policy, max_path_length, render=False, render_mode=('rgb_array')):
     if render:
