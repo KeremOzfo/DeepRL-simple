@@ -84,7 +84,7 @@ def mean_squared_error(a, b):
 
 ########################## Sample trajectory using the given policy ###############################################
 
-def sample_trajectory(env, policy, max_path_length, render=False, render_mode=('rgb_array')):
+def sample_trajectory(env, policy, max_path_length, render=True, render_mode=('rgb_array')):
     if render:
         env.render(mode="human")
 
@@ -114,9 +114,12 @@ def sample_trajectory(env, policy, max_path_length, render=False, render_mode=('
         obs.append(ob)  # append the observation
         ac = policy.get_action(ob)  # get action based on policy and the state
         acs.append(ac)  # append the action
-
         # take that action and record results
-        ob, rew, done, _ = env.step(ac)  # play the action
+        try:
+            ob, rew, done, _ = env.step(ac)  # play the action
+        except:
+            ob, rew, done, _ = env.step(ac[0])  # play the action
+        #ob, rew, done, _ = env.step(env.action_space.sample()) ## debug
         # done  indicates whether  the episode is finished
 
         # record result of taking that action

@@ -172,6 +172,7 @@ class Model(nn.Module, metaclass=abc.ABCMeta):
         # see => https://pytorch.org/docs/stable/distributions.html for use of log_prob
         if not self.discrete:  # Continuous
             log_probs = log_probs.sum(1)
+        print(log_probs.size(),advantages.size())
         assert log_probs.size() == advantages.size()
         loss = -(log_probs * advantages).sum()
 
