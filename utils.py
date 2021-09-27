@@ -82,8 +82,7 @@ def mean_squared_error(a, b):
     return np.mean((a - b) ** 2)
 
 
-############################################
-############################################
+########################## Sample trajectory using the given policy ###############################################
 
 def sample_trajectory(env, policy, max_path_length, render=False, render_mode=('rgb_array')):
     if render:
@@ -134,7 +133,8 @@ def sample_trajectory(env, policy, max_path_length, render=False, render_mode=('
             break
 
     return Path(obs, image_obs, acs, rewards, next_obs, terminals)
-
+############ Following two functions collect trajectories using the function above ########################
+############ The first one is constrained based on the total number of steps, the second is based on the number of trajectories ####################
 
 def sample_trajectories(env, policy, min_timesteps_per_batch, max_path_length, render=False, render_mode=('rgb_array')):
     timesteps_this_batch = 0

@@ -83,13 +83,14 @@ class RL_Trainer(object):
         else:
             self.fps = 10
 
-        #########################################################
-        ##################### AGENT #############################
-        #########################################################
+        #############################################################################
+        ##################### AGENT object created here #############################
+        #############################################################################
 
         agent_class = self.params['agent_class']
         self.agent = agent_class(self.env, self.params['agent_params'])
-
+        
+        ##############################################################################
     def run_training_loop(self, n_iter, collect_policy, eval_policy,
                           initial_expertdata=None, relabel_with_expert=False,
                           start_relabel_with_expert=1, expert_policy=None):
@@ -130,7 +131,7 @@ class RL_Trainer(object):
             ############### Collect trajectories (data )  for training ######################################
             training_returns = self.collect_training_trajectories(itr,
                                 initial_expertdata, collect_policy,
-                                self.params['batch_size'])
+                                self.params['batch_size']) # This function calls the sample_trajectories() from the utils.py wich return paths.
             paths, envsteps_this_batch, train_video_paths = training_returns
             #################################################################################################
             self.total_envsteps += envsteps_this_batch
@@ -172,6 +173,7 @@ class RL_Trainer(object):
         # if your load_initial_expertdata is None, then you need to collect new trajectories at *every* iteration
 
         print("\nCollecting data to be used for training...")
+        ######## => batch_size here denotes the minimum required steps and envsteps_this_batch denotes the totl number of steps.
         paths, envsteps_this_batch = sample_trajectories(self.env, collect_policy, batch_size,
                                                              self.params['ep_len'])
 
@@ -285,10 +287,11 @@ class PG_Trainer(object):
         }
 
         agent_params = {**computation_graph_args, **estimate_advantage_args, **train_args}
-
+        ##################################################################################
+        ##################################################################################
         self.params = params
-        self.params['agent_class'] = PGAgent
-        self.params['agent_params'] = agent_params
+        self.params['agent_class'] = PGAgent # pass agent class as a part of parameter
+        self.params['agent_params'] = agent_params # pass agent parameters
         self.params['batch_size_initial'] = self.params['batch_size']
 
         ################
@@ -309,5 +312,6 @@ class PG_Trainer(object):
 
 if __name__ == "__main__":
     params = arg_parse()
+    ################# Initialize the trainer where the agent class is initialized and used ###################
     trainer = PG_Trainer(params)
     trainer.run_training_loop()
