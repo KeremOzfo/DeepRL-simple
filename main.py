@@ -173,6 +173,7 @@ class RL_Trainer(object):
         # if your load_initial_expertdata is None, then you need to collect new trajectories at *every* iteration
 
         print("\nCollecting data to be used for training...")
+        ######## => batch_size here denotes the minimum required steps and envsteps_this_batch denotes the totl number of steps.
         paths, envsteps_this_batch = sample_trajectories(self.env, collect_policy, batch_size,
                                                              self.params['ep_len'])
 
