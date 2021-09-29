@@ -14,7 +14,7 @@ LunarLander-v2
 LunarLanderContinuous-v2
 BipedalWalker-v3
 '''
-simulation = 'BipedalWalker-v3'
+simulation = 'LunarLanderContinuous-v2'
 
 env = gym.make(simulation)
 for i_episode in range(20):
