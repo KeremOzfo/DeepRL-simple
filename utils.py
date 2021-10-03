@@ -121,7 +121,6 @@ def sample_trajectory(env, policy, max_path_length, render=True, render_mode=('r
             ob, rew, done, _ = env.step(ac[0])  # play the action
         #ob, rew, done, _ = env.step(env.action_space.sample()) ## debug
         # done  indicates whether  the episode is finished
-
         # record result of taking that action
         steps += 1
         next_obs.append(ob)  # observe the next state

@@ -109,7 +109,6 @@ class RL_Trainer(object):
 
         for itr in range(n_iter):
             print("\n\n********** Iteration %i ************"%itr)
-            self.env.render()
 
             # decide if videos should be rendered/logged at this iteration
             if itr % self.params['video_log_freq'] == 0 and self.params['video_log_freq'] != -1:
@@ -150,6 +149,18 @@ class RL_Trainer(object):
 
                 if self.params['save_params']:
                     self.agent.save('{}/agent_itr_{}.pt'.format(self.params['logdir'], itr))
+            if (itr+1) % 25 ==0:
+                print(itr)
+                eval_paths, eval_envsteps_this_batch = sample_trajectories(self.env, eval_policy,
+                                                                           self.params['eval_batch_size'],
+                                                                           self.params['ep_len'],render=True)
+                eval_returns = [eval_path["reward"].sum() for eval_path in eval_paths]
+                logs = {}
+                logs["Eval_AverageReturn"] = np.mean(eval_returns)
+                logs["Eval_StdReturn"] = np.std(eval_returns)
+                logs["Eval_MaxReturn"] = np.max(eval_returns)
+                logs["Eval_MinReturn"] = np.min(eval_returns)
+                print(logs)
 
     ############################################################################################################
     ############################################################################################################

@@ -178,6 +178,7 @@ class Model(nn.Module, metaclass=abc.ABCMeta):
 
         self.optimizer.zero_grad()
         loss.backward()
+        print(loss)
         self.optimizer.step()
 
         if self.nn_baseline:

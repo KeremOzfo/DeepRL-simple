@@ -4,7 +4,7 @@ import time
 def arg_parse():
 
     parser = argparse.ArgumentParser()
-    parser.add_argument('--env_name', type=str,default='LunarLanderContinuous-v2')
+    parser.add_argument('--env_name', type=str,default='LunarLander-v2')
     parser.add_argument('--exp_name', type=str, default='anan')
     parser.add_argument('--n_iter', '-n', type=int, default=100)
 
